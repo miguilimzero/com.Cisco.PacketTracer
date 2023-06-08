@@ -23,4 +23,9 @@ modules:
       - install -D /app/opt/pt/packettracer /app/bin/packettracer
     sources:
       - type: file
-        path: cisco.deb
+        url: https://gitlab.com/ezequielramos/cisco-packet-tracker/-/raw/main/cisco.deb
+        # as you can see on the following page, the sha1 beeing validated is the
+        # official sha1. So you can be sure that this file is the same one that
+        # cisco is providing.
+        # https://www.packettracernetwork.com/download/download-packet-tracer.html
+        sha1: d3b506411c204bac556d323d929797f33ddc1e6b
