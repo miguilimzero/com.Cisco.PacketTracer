@@ -1,0 +1,26 @@
+app-id: com.Cisco.PacketTracer
+runtime: org.freedesktop.Platform
+runtime-version: "22.08"
+sdk: org.freedesktop.Sdk
+command: packettracer
+
+finish-args:
+  - --share=network
+  - --socket=x11
+  - --filesystem=xdg-documents
+
+modules:
+  - name: packettracer
+    buildsystem: simple
+    build-commands:
+      - mkdir packettracer
+      - ar -x cisco.deb --output=packettracer
+      - tar -xvf packettracer/control.tar.xz --directory=packettracer
+      - tar -xvf packettracer/data.tar.xz --directory=packettracer
+      - chmod -R 755 packettracer
+      - cp -rf packettracer/. /app/
+      - sed -i 's/\/opt\/pt/\/app\/opt\/pt/g' /app/opt/pt/packettracer
+      - install -D /app/opt/pt/packettracer /app/bin/packettracer
+    sources:
+      - type: file
+        path: cisco.deb
